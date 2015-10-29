@@ -22,3 +22,6 @@ require('prism');
 
 // Drag and Drop Example
 require('./drag-demo');
+
+// Wikipedia Demo
+require('./suggestions-demo');
