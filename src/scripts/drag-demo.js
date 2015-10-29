@@ -1,3 +1,7 @@
+
+// JSBin
+// https://jsbin.com/nakuyuyepi/edit?js,output
+
 var Rx = require('rx');
 
 module.exports = (function () {
@@ -6,27 +10,16 @@ module.exports = (function () {
 
   var containerMouseMove = Rx.Observable.fromEvent(container, 'mousemove');
   var containerMouseUp = Rx.Observable.fromEvent(container, 'mouseup');
-
   var dragMouseDown = Rx.Observable.fromEvent(drag, 'mousedown');
 
   var dragging = dragMouseDown
     .flatMap(function (contactPoint) {
-      return containerMouseMove
-        .map(function (event) {
-          event.preventDefault();
-
-          return {
-            x: event.clientX,
-            y: event.clientY
-          }
-        })
-        .takeUntil(containerMouseUp);
+      return containerMouseMove.takeUntil(containerMouseUp);
     });
 
   dragging.subscribe(function (point) {
-    console.log(point);
-    drag.style.top = point.y + 'px';
-    drag.style.left = point.x + 'px';
+    drag.style.top = point.pageY + 'px';
+    drag.style.left = point.pageX + 'px';
   });
 
 
