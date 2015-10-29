@@ -20,3 +20,5 @@ bespoke.from('article', [
 // debowerify: https://github.com/eugeneware/debowerify
 require('prism');
 
+// Drag and Drop Example
+require('./drag-demo');

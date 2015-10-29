@@ -11,7 +11,7 @@ html
 
     article
 
-      section
+      section(data-bespoke-backdrop='start')
         h1 Reactive Programming
         h3 <a href="https://twitter.com/jonalvarezz" target="_blank">@jonalvarezz</a>
 
@@ -20,41 +20,186 @@ html
         h3 Builder
 
       section
-        h2 Touch Interaction
-        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-touch">bespoke-touch</a>
+        h2 This talk is about
+        br
+        ul
+          li Functional Programming
+          li Reactive Programming
+          li Build in the right way
+        br
+        p.text-color-red This is NOT about <strong>FRP</strong>
+
+      section(data-bespoke-backdrop='looking-around')
+        h3 I know that feel bru
+
+      section(data-bespoke-backdrop='asphalt')
+        h2.text-color-yellow Async
+
+      section(data-bespoke-backdrop='asphalt')
+        <blockquote class="twitter-tweet" lang="es"><p lang="en" dir="ltr">What do we want?&#10;&#10;ASYNCHRONICITY&#10;&#10;When do we want it?&#10;&#10;THAT’S IRRELEVANT.</p>&mdash; I Am Devloper (@iamdevloper) <a href="https://twitter.com/iamdevloper/status/656798423878799360">octubre 21, 2015</a></blockquote>
 
       section
-        h2 Syntax Highlighting
-        h3 Powered by <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a>
+        h2.text-color-red Async Nightmares
+        br
+        ul
+          li Memory leaks
+          li Callback hell
+          li Race Conditions
+          li Complex State Machines
+          li Disjointed Error Handling
+
+      section(data-bespoke-backdrop='bg-yellow')
+        h2.text-color-gray Reactive Programming is about <strong>collections</strong>
+
+      section(data-bespoke-backdrop='asphalt')
+        h2 Arrays
         pre
           code.language-javascript.
-            bespoke.from('article', [
-              classes(),
-              keys(),
-              touch(),
-              bullets('li, .bullet')
-            ]);
+            [2, 4, 6, 19, 23, 10]
 
-      section(data-bespoke-hash='named-route')
-        h2 Named Route
-        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a>
-        p Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.
+      section()
+        h2.text-color-yellow Functional Programming
+        h3 Provides developers with the tools to abstract common collection operations into reusable, composable building blocks
 
-      section.emphatic-text(data-bespoke-backdrop='emphatic')
-        h2 Emphatic Slide!
-        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-backdrop">bespoke-backdrop</a>
+      section(data-bespoke-backdrop='asphalt')
+        h2 Five functions to rule them all
+        ul
+          li map()
+          li filter()
+          li reduce()
+          li <span style="text-decoration:line-through">concatAll()</span> flatMap()
+          li zip()
+
+      section(data-bespoke-backdrop='bg-white')
+        h2.text-color-gray map()
+        img(src='images/map.png')
+
+      section(data-bespoke-backdrop='asphalt')
+        h2 map()
+        br
+        pre
+          code.language-javascript.
+            [1, 2, 3, 4, 5, 6].map(function (number) {
+              return number + 3
+            });
+
+            // [4, 5, 6, 7, 8, 9]
+
+      section(data-bespoke-backdrop='bg-white')
+        h2.text-color-gray filter()
+        img(src='images/filter.png')
+
+      section(data-bespoke-backdrop='asphalt')
+        h2 filter()
+        br
+        pre
+          code.language-javascript.
+            [1, 2, 3, 4, 5, 6].filter(function (number) {
+              return number % 2 === 0
+            });
+
+            // [2, 4, 6]
+
+      section(data-bespoke-backdrop='asphalt')
+        h2 reduce()
+        br
+        pre
+          code.language-javascript.
+            [1, 2, 3, 4, 5, 6].reduce(function (acc, curr) {
+              return acc + curr
+            });
+
+            // [21]
+
+      section(data-bespoke-backdrop='asphalt')
+        h2 flatMap()
+        br
+        pre
+          code.language-javascript.
+            [ [1], [2, 3], [4, 5, 6]].flatMap();
+
+            // [1, 2, 3, 4, 5, 6]
+
+      section(data-bespoke-backdrop='asphalt')
+        h2 zip()
+        br
+        pre
+          code.language-javascript.
+            Array.zip([1, 2, 3], [4, 5, 6], function(left, right) {
+              return left + right
+            });
+
+            // [5, 7, 9];
 
       section
-        h2.bullet Just the beginning...
+        h2.text-color-green Demo
+        h3 Functional programming & Composition
+        p <a href="https://jsbin.com/gukofomimo/edit?js,console">Demo link</a>
+
+      section(data-bespoke-backdrop='not-bad')
+        h3 Not bad?
+
+      section(data-bespoke-backdrop='asphalt')
+        h3 What's difference between an <strong class="text-color-yellow">Array</strong>...
+        br
+        pre
+          code.language-javascript.
+            [{x: 23, y: 30}, {x: 23, y: 40}, {x: 12, y: 90}];
+
+      section(data-bespoke-backdrop='asphalt')
+        h3 And an <strong class="text-color-yellow">Event</strong>?
+        br
+        pre
+          code.language-javascript.
+            // Mouse Event
+            {x: 23, y: 30}... {x: 23, y: 40}... {x: 12, y: 90}...
+
+      section(data-bespoke-backdrop='bg-yellow')
+        h2.text-color-gray Arrays and Events are both <span class="text-emphasis">collections</span>
+
+      section
+        h2 What if <span class="text-color-yellow">Events (streams)</span> could be projected, filtered, concatenated and zipped?
+        h3 ...Like any other Collection
+
+      section(data-bespoke-backdrop='bg-red')
+        h3.text-color-white Introducing
+        h2.text-color-white Observables
+        h3.text-color-white Collection of values in any amount of time
+
+      section
+        h2 <span class="text-color-yellow">Reactive programming</span> is about Observables
+
+      section(data-bespoke-backdrop="asphalt")
+        h2.text-color-yellow Observables
         br
         ul
-          li Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em>
-          li Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em>
-          li Edit JavaScript in <em>'src/scripts/main.js'</em>
+          li Start a data stream
+          li Emit 0 to N messages
+          li Teardown the data stream
+
+      section
+        h2.text-color-orange Data Streams
+        h3 Can be anything. Arrays, DOM Events, Network request (sockets, Ajax), Animations...
+
+      section(data-bespoke-backdrop='bg-white')
+        h2.text-color-gray The General Theory of Reactivity
+        img(src='images/reactivity.png')
+
+      section(data-bespoke-backdrop='asphalt', data-bespoke-hash='rx')
+        img(src='images/rx.png')
         br
-        ul
-          li
-            strong Enjoy! :)
-            a(href='http://twitter.com/markdalgleish')  -@markdalgleish
+        h2 Reactive Extentensions
+        h3 Rx – RxJS – <a target="_blank" href="http://reactivex.io">reactivex.io</a>
+
+      section
+        h2.text-color-green Demo
+        h3 Drag & Drop with RxJS
+        p Code at src/scripts/drag-demo.js
+
+      section
+        div#drag-container
+          span#drag-element
+
 
     script(src='build/build.js')
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
