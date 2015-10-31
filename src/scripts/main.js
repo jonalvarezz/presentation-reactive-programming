@@ -21,7 +21,8 @@ bespoke.from('article', [
 require('prism');
 
 // Drag and Drop Example
-require('./drag-demo');
+// s/drop/rolo
+require('./demos/drag-and-rolo');
 
 // Wikipedia Demo
-require('./suggestions-demo');
+require('./demos/suggestions');
