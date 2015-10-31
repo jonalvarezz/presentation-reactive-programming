@@ -22,5 +22,4 @@ module.exports = (function () {
     drag.style.left = point.pageX + 'px';
   });
 
-
 })();
