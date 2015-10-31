@@ -36,21 +36,26 @@ var App = React.createClass({
       .filter(function (text) {
         return text.length > 2;
       })
+      .debounce(200)
       .distinctUntilChanged();
-
-    // /* Now debounce the input for 500ms */
-    // var debounced = keyups
-    //   .debounce(500 /* ms */);
-
-    //  Now get only distinct values, so we eliminate the arrows and other control characters
-    // var distinct = debounced
-    //   ;
 
     var suggestions = keyup.flatMapLatest(queryWikipedia);
 
     suggestions.subscribe(function (data) {
       console.log(data);
-    }.bind(this));
+      var results = [];
+      data[1].forEach(function (result, index) {
+        results.push({
+          'id': index,
+          'keyword': result,
+          'description': data[2][index],
+          'url': data[3][index]
+        });
+      });
+      this.setState({results: results});
+    }.bind(this), function (err) {
+      console.log('Something goes wrong.');
+    });
 
   },
 
@@ -64,8 +69,23 @@ var App = React.createClass({
           ref='searchInput'
           onChange={this._onChange}
         />
-        <div>
-          {this.state.inputText}
+        <div className="app__contents">
+          <ul className="app__list">
+            {this.state.results.map(function (result) {
+              return (
+                <li className="app__item" key={result.id}>
+                  <a href={result.url} className="app__item-wrapper" target="_blank">
+                    <div>
+                      <h4>{result.keyword}</h4>
+                      <div className="app__item-desc">
+                        {result.description}
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     );

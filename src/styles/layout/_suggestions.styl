@@ -1,0 +1,33 @@
+
+.Input-app
+  input
+    background-color #111111
+    color white
+    border none
+    border-bottom 4px solid color-yellow
+    transition all 300ms ease-in-out
+    &:focus
+      // background-color rgba(#11111, 20%)
+      outline none
+
+.app__contents
+  max-height 300px
+  overflow-y scroll
+
+.app__list
+  max-width 500px
+  font-size 16px
+  margin-top 20px
+
+.app__item
+  padding 10px
+  background white
+  color #444
+  margin-bottom 20px
+  transition all 350ms ease-in-out
+  &:hover
+    background-color color-asphalt
+    color white
+  &:before
+    content none
+    margin 0
