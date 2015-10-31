@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Reactive Programming</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article>
+      <section data-bespoke-backdrop="start">
+        <h1>Reactive Programming</h1>
+        <h3><a href="https://twitter.com/jonalvarezz" target="_blank">@jonalvarezz</a></h3>
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h2>I'm a Builder</h2>
+        <h3>Focusing in Frontend Development</h3>
+      </section>
+      <section>
+        <h2>This talk is about</h2><br>
+        <ul>
+          <li>Functional Programming</li>
+          <li>Reactive Programming</li>
+          <li>Featuring some React, and </li>
+          <li>Async problems case studies</li>
+        </ul><br>
+        <p class="text-color-red">This is NOT about <strong>FRP</strong></p>
+      </section>
+      <section data-bespoke-backdrop="looking-around">
+        <h3>I know that feel bru</h3>
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h2 class="text-color-yellow">Async</h2>
+      </section>
+      <section data-bespoke-backdrop="asphalt"><blockquote class="twitter-tweet" lang="es"><p lang="en" dir="ltr">What do we want?&#10;&#10;ASYNCHRONICITY&#10;&#10;When do we want it?&#10;&#10;THAT’S IRRELEVANT.</p>&mdash; I Am Devloper (@iamdevloper) <a href="https://twitter.com/iamdevloper/status/656798423878799360">octubre 21, 2015</a></blockquote></section>
+      <section>
+        <h2 class="text-color-red">Async Nightmares</h2><br>
+        <ul>
+          <li>Memory leaks</li>
+          <li>Callback hell</li>
+          <li>Race Conditions</li>
+          <li>Complex State Machines</li>
+          <li>Disjointed Error Handling</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="bg-yellow">
+        <h2 class="text-color-gray">Reactive Programming is about <strong>collections</strong></h2>
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h2>Arrays</h2>
+        <pre><code class="language-javascript">[2, 4, 6, 19, 23, 10]
+</code></pre>
+      </section>
+      <section>
+        <h2 class="text-color-yellow">Functional Programming</h2>
+        <h3>Provides developers with the tools to abstract common collection operations into reusable, composable building blocks</h3>
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h2>Five functions to rule them all</h2>
+        <ul>
+          <li>map()</li>
+          <li>filter()</li>
+          <li>reduce()</li>
+          <li><span style="text-decoration:line-through">concatAll()</span> flatMap()</li>
+          <li>zip()</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="bg-white" data-bespoke-hash="map">
+        <h2 class="text-color-gray">map()</h2><img src="images/map.png">
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h2>map()</h2><br>
+        <pre><code class="language-javascript">[1, 2, 3, 4, 5, 6].map(function (number) {
+  return number + 3
+});
+
+// [4, 5, 6, 7, 8, 9]
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="bg-white" data-bespoke-hash="filter">
+        <h2 class="text-color-gray">filter()</h2><img src="images/filter.png">
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h2>filter()</h2><br>
+        <pre><code class="language-javascript">[1, 2, 3, 4, 5, 6].filter(function (number) {
+  return number % 2 === 0
+});
+
+// [2, 4, 6]
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="asphalt" data-bespoke-hash="reduce">
+        <h2>reduce()</h2><br>
+        <pre><code class="language-javascript">[1, 2, 3, 4, 5, 6].reduce(function (acc, curr) {
+  return acc + curr
+});
+
+// [21]
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="asphalt" data-bespoke-hash="flatmap">
+        <h2>flatMap()</h2><br>
+        <pre><code class="language-javascript">[ [1], [2, 3], [4, 5, 6]].flatMap();
+
+// [1, 2, 3, 4, 5, 6]
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="asphalt" data-bespoke-hash="zip">
+        <h2>zip()</h2><br>
+        <pre><code class="language-javascript">Array.zip([1, 2, 3], [4, 5, 6], function(left, right) {
+  return left + right
+});
+
+// [5, 7, 9];
+</code></pre>
+      </section>
+      <section data-bespoke-hash="demo1">
+        <h2 class="text-color-green">Demo</h2>
+        <h3>Functional programming & Composition</h3>
+        <p><a href="https://jsbin.com/gukofomimo/edit?js,console">Demo link</a></p><br>
+        <p><pre>src/scripts/demos/fp-composition.js</pre></p>
+      </section>
+      <section data-bespoke-backdrop="not-bad">
+        <h3>Not bad?</h3>
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h3>What's difference between an <strong class="text-color-yellow">Array</strong>...</h3><br>
+        <pre><code class="language-javascript">[{x: 23, y: 30}, {x: 23, y: 40}, {x: 12, y: 90}];
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h3>And an <strong class="text-color-yellow">Event</strong>?</h3><br>
+        <pre><code class="language-javascript">// Mouse Event
+{x: 23, y: 30}... {x: 23, y: 40}... {x: 12, y: 90}...
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="bg-yellow">
+        <h2 class="text-color-gray">Arrays and Events are both <span class="text-emphasis">collections</span></h2>
+      </section>
+      <section>
+        <h2>What if <span class="text-color-yellow">Events (streams)</span> could be projected, filtered, concatenated and zipped?</h2>
+        <h3>...Like any other Collection</h3>
+      </section>
+      <section data-bespoke-backdrop="bg-red">
+        <h3 class="text-color-white">Introducing</h3>
+        <h2 class="text-color-white">Observables</h2>
+        <h3 class="text-color-white">Collection of values in any amount of time</h3>
+      </section>
+      <section>
+        <h2><span class="text-color-yellow">Reactive programming</span> is about Observables</h2>
+      </section>
+      <section data-bespoke-backdrop="asphalt">
+        <h2 class="text-color-yellow">Observables</h2><br>
+        <ul>
+          <li>Start a data stream</li>
+          <li>Emit 0 to N messages</li>
+          <li>Teardown the data stream</li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="text-color-orange">Data Streams</h2>
+        <h3>Can be anything. Arrays, DOM Events, Network request (sockets, Ajax), Animations...</h3>
+      </section>
+      <section data-bespoke-backdrop="bg-white">
+        <h2 class="text-color-gray">The General Theory of Reactivity</h2><img src="images/reactivity.png">
+      </section>
+      <section data-bespoke-backdrop="asphalt" data-bespoke-hash="rx"><img src="images/rx.png"><br>
+        <h2>Reactive Extentensions</h2>
+        <h3>Rx – RxJS – <a target="_blank" href="http://reactivex.io">reactivex.io</a></h3>
+      </section>
+      <section data-bespoke-hash="demo2">
+        <h2 class="text-color-green">Demo</h2>
+        <h3>Drag & Drop with RxJS</h3>
+        <p><pre>src/scripts/demos/drag-and-rolo.js</pre></p>
+      </section>
+      <section data-bespoke-hash="demo2-app">
+        <div id="drag-container"><span id="drag-element"></span></div>
+      </section>
+      <section data-bespoke-hash="demo3">
+        <h2 class="text-color-green">Demo</h2>
+        <h3>Wikipedia suggestions – Async problems</h3>
+        <p><pre>src/scripts/demos/suggestions.js</pre></p>
+      </section>
+      <section data-bespoke-hash="demo3-app">
+        <div id="appMount"></div>
+      </section>
+      <section data-bespoke-backdrop="asphalt" data-bespoke-hash="resources">
+        <h2 class="text-color-yellow">Resources</h2>
+        <h3>Thinking in Reactive, learning path.</h3>
+        <ul>
+          <li><a href="https://www.youtube.com/watch?v=XRYN2xt11Ek" target="_blank">Async JavaScript with Rx, Jafar Hussain</a></li>
+          <li><a href="http://reactivex.io/learnrx/" target="_blank">Learnx, Reactivex.io</a></li>
+          <li><a href="https://medium.com/@andrestaltz/2-minute-introduction-to-rx-24c8ca793877#.rzfztqbhn" target="_blank">2 minute introduction to Rx, André Staltz</a></li>
+          <li><a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754" target="_blank">RxJS, Introduction you’ve been missing, André Staltz</a></li>
+          <li><a href="https://github.com/Reactive-Extensions/RxJS/tree/master/doc/gettingstarted" target="_blank">RxJS Docs</a></li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="final">
+        <h2>Thank you</h2>
+        <h3><a href="https://twitter.com/jonalvarezz" target="_blank">Jonathan Álvarez</a></h3>
+      </section>
+    </article>
+    <script src="build/build.js"></script><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </body>
+</html>
