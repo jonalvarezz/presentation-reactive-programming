@@ -21,6 +21,18 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var Rx = require('rx');
 var http = require('jquery').ajax;
+var shortid = require('shortid');
+
+// Lets implement a Zip Array function
+function arrayZip(left, right, combinerFunction) {
+  var counter, results = [];
+
+  for(counter = 0; counter < Math.min(left.length, right.length); counter++) {
+    results.push( combinerFunction(left[counter], right[counter]) );
+  }
+
+  return results;
+}
 
 // Make the Wikipedia query an Observable
 function queryWikipedia(term) {
@@ -69,24 +81,11 @@ var App = React.createClass({
     var suggestions = keyup.flatMapLatest(queryWikipedia);
 
     // Process each response.
-    suggestions.subscribe(function (data) {
-      console.log(data);
-      var results = [];
-      data[1].forEach(function (result, index) {
-        results.push({
-          'id': index,
-          'keyword': result,
-          'description': data[2][index],
-          'url': data[3][index]
-        });
-      });
-      this.setState({results: results});
-    }.bind(this), function (err) {
-      console.log('Something goes wrong.');
-    });
+    suggestions.subscribe(this._onNext, this._onError);
 
   },
 
+  // This is React render method.
   render: function () {
     return (
       <div className="Input-app">
@@ -99,10 +98,12 @@ var App = React.createClass({
         />
         <div className="app__contents">
           <ul className="app__list">
+
             {this.state.results.map(function (result) {
               return (
                 <li className="app__item" key={result.id}>
-                  <a href={result.url} className="app__item-wrapper" target="_blank">
+                  <a href={result.url} className="app__item-wrapper"
+                    target="_blank">
                     <div>
                       <h4>{result.keyword}</h4>
                       <div className="app__item-desc">
@@ -113,6 +114,7 @@ var App = React.createClass({
                 </li>
               );
             })}
+
           </ul>
         </div>
       </div>
@@ -121,6 +123,37 @@ var App = React.createClass({
 
   _onChange: function (event) {
     this.setState({inputText: event.target.value})
+  },
+
+  /*
+   * Render each response
+   * Wikipedia response with a collection of 4 objects, lets compose a single
+   * one using fp's zip operator
+   */
+  _onNext: function (data) {
+    var results = []
+
+    results = arrayZip(
+      arrayZip(data[1], data[2], function (left, right) {
+        return {
+          id: shortid.generate(),
+          keyword: left,
+          description: right,
+          url: '' // declare for performance
+        };
+      }), // <- Left
+      data[3], // <- Right
+      function(left, right) { // <- Combiner
+        left.url = right;
+        return left;
+      }
+    );
+
+    this.setState({results: results});
+  },
+
+  _onError: function (err) {
+    console.log('Something goes wrong.');
   }
 
 });
